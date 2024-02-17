@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
         // TeacherEvaluation::factory(4)
         //     ->has(EvaluationGroup::factory()->count(2)->has(EvaluationItem::factory(5)), 'topics')
         //     ->create();
-        User::factory(10)->create();
-        Evaluation::factory(3)->hasItems(10)->create();
+        User::factory(5)->has(
+            Evaluation::factory(3)->hasItems(10)
+        )->create();
     }
 }

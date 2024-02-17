@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -15,11 +14,14 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $credentials = $request->validated();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+        } else {
             throw ValidationException::withMessages([
-                'email' => ['The credentials you entered are incorrect']
+                'email' => ['The credentials you provided do not match our records.']
             ]);
         }
     }

@@ -9,12 +9,17 @@ use App\Http\Resources\EvaluationResource;
 
 class EvaluationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Evaluation::class);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return EvaluationResource::collection(Evaluation::all());
+        return EvaluationResource::collection(auth()->user()->evaluations()->get());
     }
 
     /**
@@ -22,7 +27,7 @@ class EvaluationController extends Controller
      */
     public function store(StoreEvaluationRequest $request)
     {
-        $evaluation = Evaluation::create($request->validated());
+        $evaluation = $request->user()->evaluations()->create($request->validated());
 
         return EvaluationResource::make($evaluation);
     }
@@ -32,7 +37,7 @@ class EvaluationController extends Controller
      */
     public function show(Evaluation $evaluation)
     {
-        //
+        return EvaluationResource::make($evaluation);
     }
 
     /**
@@ -40,7 +45,9 @@ class EvaluationController extends Controller
      */
     public function update(UpdateEvaluationRequest $request, Evaluation $evaluation)
     {
-        //
+        $evaluation->update($request->validated());
+
+        return EvaluationResource::make($evaluation);
     }
 
     /**

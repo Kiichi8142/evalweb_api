@@ -22,8 +22,7 @@ class UpdateEvaluationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "score" => "required",
-            "evaluation_id" => "required"
+            "name" => "required",
         ];
     }
 }

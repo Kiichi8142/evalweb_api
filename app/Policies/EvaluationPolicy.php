@@ -13,7 +13,7 @@ class EvaluationPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class EvaluationPolicy
      */
     public function view(User $user, Evaluation $evaluation): bool
     {
-        //
+        return $user->id === $evaluation->user_id;
     }
 
     /**
@@ -29,7 +29,7 @@ class EvaluationPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -37,7 +37,7 @@ class EvaluationPolicy
      */
     public function update(User $user, Evaluation $evaluation): bool
     {
-        //
+        return $user->id === $evaluation->user_id;
     }
 
     /**
@@ -45,22 +45,6 @@ class EvaluationPolicy
      */
     public function delete(User $user, Evaluation $evaluation): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Evaluation $evaluation): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Evaluation $evaluation): bool
-    {
-        //
+        return false;
     }
 }

@@ -2,19 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evaluation;
 use App\Models\EvaluationItem;
 use App\Http\Requests\StoreEvaluationItemRequest;
 use App\Http\Requests\UpdateEvaluationItemRequest;
 use App\Http\Resources\EvaluationItemResource;
+use Illuminate\Http\Request;
 
 class EvaluationItemController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(EvaluationItem::class, 'item');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return EvaluationItemResource::collection(EvaluationItem::all());
+        $userId = $request->user()->id;
+        $items = Evaluation::with('items')
+            ->where('user_id', $userId)
+            ->get()
+            ->flatMap(function ($evaluation) {
+                return $evaluation->items;
+            });
+
+        return EvaluationItemResource::collection($items);
     }
 
     /**

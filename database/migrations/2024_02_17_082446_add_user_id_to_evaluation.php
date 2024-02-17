@@ -10,11 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('evaluations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->mediumText('description')->nullable();
-            $table->timestamps();
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->foreignId('user_id')->after('id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -23,6 +20,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('evaluations');
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
     }
 };
