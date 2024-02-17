@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Evaluation;
 use App\Models\EvaluationItem;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         // TeacherEvaluation::factory(4)
         //     ->has(EvaluationGroup::factory()->count(2)->has(EvaluationItem::factory(5)), 'topics')
         //     ->create();
-
-        Evaluation::factory(3)->has(EvaluationItem::factory()->count(10))->create();
+        User::factory(10)->create();
+        Evaluation::factory(3)->hasItems(10)->create();
     }
 }
