@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationItemController;
 use App\Http\Controllers\TeacherEvaluationController;
@@ -24,4 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('/evaluations', EvaluationController::class);
     Route::apiResource('/items', EvaluationItemController::class);
+    Route::apiResource('/employees', EmployeeController::class);
 });

@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EvaluationResource extends JsonResource
+class EmployeeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +17,10 @@ class EvaluationResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->name,
-            "description" => $this->description,
-            "is_completed" => (bool) $this->isCompleted,
-            "items" => EvaluationItemResource::collection($this->items),
-            "employee" => EmployeeResource::make($this->employee),
+            "firstname" => $this->firstname,
+            "lastname" => $this->lastname,
+            "position" => $this->position,
+            "team" => TeamResource::make(Team::find($this->team_id)->first()),
         ];
     }
 }
