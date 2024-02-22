@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->mediumText('description')->nullable();
             $table->integer('score')->default(0);
+            $table->integer('max_score')->default(4);
             $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -29,7 +29,13 @@ class DatabaseSeeder extends Seeder
         $teams = Team::factory(5)->create();
 
         foreach ($teams as $team) {
-            Employee::factory(5)->for($team)->has(User::factory(1))->create();
+            $employees = Employee::factory(5)->for($team)->create();
+
+            foreach ($employees as $employee) {
+                User::factory()->for($employee)->state([
+                    "name" => $employee->firstname . " " . $employee->lastname,
+                ])->create();
+            }
         }
 
         $teams = Team::all();
@@ -37,6 +43,8 @@ class DatabaseSeeder extends Seeder
         foreach ($teams as $team) {
             $manager = $team->employees->random();
             $team->manager_id = $manager->id;
+            $manager->position = "Team Manager";
+            $manager->save();
             $team->save();
         }
 
@@ -47,9 +55,12 @@ class DatabaseSeeder extends Seeder
             $emps = $team->employees;
             // make evaluation for manager
             foreach ($emps as $emp) {
-                Evaluation::factory()->for($emp)->hasItems(10)->create([
-                    "user_id" => $manager
-                ]);
+                if ($emp->id != $manager) {
+                    Evaluation::factory()->for($emp)->hasItems(10)->create([
+                        "user_id" => $manager
+                    ]);
+                }
+                // make self assessment
                 Evaluation::factory()->for($emp)->hasItems(10)->create([
                     "user_id" => $emp->id
                 ]);

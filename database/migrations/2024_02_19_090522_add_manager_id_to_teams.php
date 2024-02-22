@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->foreignId('manager_id')->nullable()->constrained(
+            $table->foreignId('manager_id')->nullable()->after('id')->constrained(
                 table: 'employees',
                 indexName: 'team_employee_id'
             );

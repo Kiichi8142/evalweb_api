@@ -21,6 +21,7 @@ class EvaluationResource extends JsonResource
             "is_completed" => (bool) $this->isCompleted,
             "items" => EvaluationItemResource::collection($this->items),
             "employee" => EmployeeResource::make($this->employee),
+            "assessor" => EmployeeResource::make($this->user->employee),
         ];
     }
 }
