@@ -19,6 +19,7 @@ class EvaluationItemResource extends JsonResource
             "name" => $this->name,
             "description" => $this->description,
             "score" => $this->score,
+            "section_id" => $this->section_id
         ];
     }
 }

@@ -16,6 +16,6 @@ class Team extends Model
 
     public function manager()
     {
-        return Employee::where("id", $this->manager_id)->first();
+        return $this->hasOne(Employee::class, 'id', 'manager_id');
     }
 }

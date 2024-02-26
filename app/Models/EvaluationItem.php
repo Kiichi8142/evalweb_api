@@ -19,4 +19,9 @@ class EvaluationItem extends Model
     {
         return $this->belongsTo(Evaluation::class);
     }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

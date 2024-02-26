@@ -10,12 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->boolean('editable')->default(false);
-            $table->integer('max_score')->default(50);
-            $table->timestamps();
+        Schema::table('evaluation_items', function (Blueprint $table) {
+            $table->foreignId('section_id')->after('id')->constrained();
         });
     }
 
@@ -24,6 +20,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('sections');
+        Schema::table('evaluation_items', function (Blueprint $table) {
+            $table->dropForeign(['section_id']);
+            $table->dropColumn('section_id');
+        });
     }
 };

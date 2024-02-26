@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Employee;
 use App\Models\Evaluation;
 use App\Models\EvaluationItem;
+use App\Models\Section;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -56,14 +57,23 @@ class DatabaseSeeder extends Seeder
             // make evaluation for manager
             foreach ($emps as $emp) {
                 if ($emp->id != $manager) {
-                    Evaluation::factory()->for($emp)->hasItems(10)->create([
+                    Evaluation::factory()->for($emp)->create([
                         "user_id" => $manager
                     ]);
                 }
                 // make self assessment
-                Evaluation::factory()->for($emp)->hasItems(10)->create([
+                Evaluation::factory()->for($emp)->create([
                     "user_id" => $emp->id
                 ]);
+            }
+        }
+
+        $sections = Section::factory(3)->create();
+        $evaluations = Evaluation::all();
+
+        foreach ($evaluations as $evaluation) {
+            foreach ($sections as $section) {
+                EvaluationItem::factory(10)->for($evaluation)->for($section)->create();
             }
         }
 

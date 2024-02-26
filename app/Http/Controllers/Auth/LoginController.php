@@ -14,12 +14,7 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
-        $credentials = $request->validated();
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-        } else {
+        if (!auth()->attempt($request->only(['email', 'password']))) {
             throw ValidationException::withMessages([
                 'email' => ['The credentials you provided do not match our records.']
             ]);
