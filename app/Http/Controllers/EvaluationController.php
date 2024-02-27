@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluation;
 use App\Http\Requests\StoreEvaluationRequest;
+use App\Http\Requests\StoreEvaluationSectionRequest;
 use App\Http\Requests\UpdateEvaluationRequest;
 use App\Http\Resources\EvaluationResource;
+use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
 {
@@ -56,5 +58,12 @@ class EvaluationController extends Controller
     public function destroy(Evaluation $evaluation)
     {
         //
+    }
+
+    public function addSections(StoreEvaluationSectionRequest $request, Evaluation $evaluation)
+    {
+        $evaluation->sections()->syncWithoutDetaching($request->sections);
+
+        return 'Attached';
     }
 }

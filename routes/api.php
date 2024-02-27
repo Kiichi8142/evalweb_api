@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('/evaluations', EvaluationController::class);
+    Route::post('/evaluations/sections/{evaluation}', [EvaluationController::class, 'addSections']);
     Route::apiResource('/items', EvaluationItemController::class);
     Route::apiResource('/employees', EmployeeController::class);
 });

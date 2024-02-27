@@ -22,6 +22,7 @@ class EvaluationResource extends JsonResource
             "items" => EvaluationItemResource::collection($this->items),
             "employee" => EmployeeResource::make($this->employee),
             "assessor" => EmployeeResource::make($this->user->employee),
+            "sections" => $this->sections,
         ];
     }
 }

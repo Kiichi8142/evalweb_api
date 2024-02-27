@@ -12,6 +12,12 @@ class Section extends Model
     protected $fillable = [
         "name",
     ];
+
+    public function evaluations()
+    {
+        return $this->belongsToMany(Evaluation::class);
+    }
+
     public function items()
     {
         return $this->hasMany(EvaluationItem::class);
