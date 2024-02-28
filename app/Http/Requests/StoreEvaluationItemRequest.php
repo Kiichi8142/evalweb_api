@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\sectionExistsInEvaluation;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEvaluationItemRequest extends FormRequest
 {
@@ -21,8 +25,15 @@ class StoreEvaluationItemRequest extends FormRequest
      */
     public function rules(): array
     {
+        Debugbar::info('Hello world');
         return [
             "name" => "required|string|max:255",
+            "evaluation_id" => "required|exists:evaluations,id",
+            "section_id" => [
+                'required',
+                'exists:sections,id',
+                new SectionExistsInEvaluation($this->evaluation_id)
+            ],
         ];
     }
 }

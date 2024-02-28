@@ -12,7 +12,8 @@ class EvaluationItem extends Model
     protected $fillable = [
         "name",
         "score",
-        "evaluation_id"
+        "evaluation_id",
+        "section_id"
     ];
 
     public function Evaluation()
