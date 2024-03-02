@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Template;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
+use App\Http\Resources\TemplateResource;
 
 class TemplateController extends Controller
 {
@@ -13,15 +14,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return TemplateResource::collection(Template::all());
     }
 
     /**
@@ -29,7 +22,9 @@ class TemplateController extends Controller
      */
     public function store(StoreTemplateRequest $request)
     {
-        //
+        $template = Template::create($request->validated());
+
+        return TemplateResource::make($template);
     }
 
     /**
@@ -37,15 +32,7 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Template $template)
-    {
-        //
+        return TemplateResource::make($template);
     }
 
     /**
@@ -53,7 +40,9 @@ class TemplateController extends Controller
      */
     public function update(UpdateTemplateRequest $request, Template $template)
     {
-        //
+        $template->update($request->validated());
+
+        return TemplateResource::make($template);
     }
 
     /**
