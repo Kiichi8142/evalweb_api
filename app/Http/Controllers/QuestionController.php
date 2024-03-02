@@ -38,7 +38,9 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->validated());
+
+        return QuestionResource::make($question);
     }
 
     /**
@@ -46,6 +48,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return response()->noContent();
     }
 }

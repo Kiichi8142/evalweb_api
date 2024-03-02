@@ -50,6 +50,8 @@ class TemplateController extends Controller
      */
     public function destroy(Template $template)
     {
-        //
+        $template->delete();
+
+        return response()->noContent();
     }
 }

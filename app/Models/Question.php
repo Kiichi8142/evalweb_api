@@ -12,6 +12,7 @@ class Question extends Model
     protected $fillable = [
         'name',
         'max_score',
+        'section_id',
     ];
 
     public function template()
