@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Evaluation>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Template>
  */
-class EvaluationFactory extends Factory
+class TemplateFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class EvaluationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'description' => fake()->sentence(),
         ];
     }
 }

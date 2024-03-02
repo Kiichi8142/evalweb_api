@@ -12,8 +12,6 @@ return new class extends Migration {
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->mediumText('description')->nullable();
             $table->timestamps();
         });
     }

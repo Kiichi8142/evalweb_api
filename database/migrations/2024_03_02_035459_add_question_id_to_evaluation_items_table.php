@@ -10,11 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('evaluation_items', function (Blueprint $table) {
-            $table->id();
-            $table->integer('score')->default(0);
-            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('evaluation_items', function (Blueprint $table) {
+            $table->foreignId('question_id')->after('evaluation_id')->constrained();
         });
     }
 
@@ -24,8 +21,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('evaluation_items', function (Blueprint $table) {
-            $table->dropForeign('evaluation_id');
+            $table->dropForeign('question_id');
+            $table->dropColumn('question_id');
         });
-        Schema::dropIfExists('evaluation_items');
     }
 };

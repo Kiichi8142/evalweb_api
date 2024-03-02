@@ -5,28 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EvaluationItem extends Model
+class Question extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "score",
-        "evaluation_id",
-        "section_id"
+        'name',
+        'max_score',
     ];
 
-    public function Evaluation()
+    public function template()
     {
-        return $this->belongsTo(Evaluation::class);
+        return $this->belongsTo(Template::class);
     }
 
     public function section()
     {
         return $this->belongsTo(Section::class);
-    }
-
-    public function question()
-    {
-        return $this->belongsTo(Question::class);
     }
 }

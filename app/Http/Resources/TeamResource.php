@@ -16,6 +16,7 @@ class TeamResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "id" => $this->id,
             "name" => $this->name,
             "department" => $this->department,
             "manager" => Employee::select('id', 'firstname', 'lastname', 'position')->findOr($this->manager_id, function () {

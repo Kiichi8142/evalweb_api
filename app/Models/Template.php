@@ -5,29 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Template extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "firstname",
-        "lastname",
-        "position",
-        "team_id"
+        'name',
+        'description'
     ];
 
-    public function team()
+    public function questions()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasMany(Question::class);
     }
 
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
-    }
-
-    public function user()
-    {
-        return $this->hasOne(User::class);
     }
 }

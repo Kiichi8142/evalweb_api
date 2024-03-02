@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +19,7 @@ class EmployeeResource extends JsonResource
             "firstname" => $this->firstname,
             "lastname" => $this->lastname,
             "position" => $this->position,
-            "team" => TeamResource::make(Team::find($this->team_id)->first()),
+            "team" => TeamResource::make($this->team),
         ];
     }
 }

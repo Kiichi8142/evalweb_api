@@ -17,8 +17,6 @@ class EvaluationItemFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->sentence(),
-            "description" => fake()->sentence(100),
             "score" => 0,
         ];
     }

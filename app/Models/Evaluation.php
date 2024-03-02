@@ -35,6 +35,11 @@ class Evaluation extends Model
         return $this->belongsToMany(Section::class)->withTimestamps();
     }
 
+    public function template()
+    {
+        return $this->belongsTo(Template::class);
+    }
+
     public function isCompleted(): Attribute
     {
         return Attribute::make(

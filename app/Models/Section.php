@@ -22,4 +22,9 @@ class Section extends Model
     {
         return $this->hasMany(EvaluationItem::class);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

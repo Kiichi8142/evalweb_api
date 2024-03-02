@@ -7,8 +7,10 @@ namespace Database\Seeders;
 use App\Models\Employee;
 use App\Models\Evaluation;
 use App\Models\EvaluationItem;
+use App\Models\Question;
 use App\Models\Section;
 use App\Models\Team;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
@@ -51,31 +53,51 @@ class DatabaseSeeder extends Seeder
 
         $teams = Team::all();
 
+        $sections = Section::factory(3)->create();
+
+        $template = Template::factory()->create();
+
+        foreach ($sections as $section) {
+            Question::factory(5)->for($template)->for($section)->create();
+        }
+
         foreach ($teams as $team) {
             $manager = $team->manager_id;
             $emps = $team->employees;
             // make evaluation for manager
             foreach ($emps as $emp) {
                 if ($emp->id != $manager) {
-                    Evaluation::factory()->for($emp)->create([
+                    Evaluation::factory()->for($emp)->for($template)->create([
                         "user_id" => $manager
                     ]);
                 }
                 // make self assessment
-                Evaluation::factory()->for($emp)->create([
+                Evaluation::factory()->for($emp)->for($template)->create([
                     "user_id" => $emp->id
                 ]);
             }
         }
 
-        $sections = Section::factory(3)->create();
-        $evaluations = Evaluation::all();
+        $templates = Template::all();
 
-        foreach ($evaluations as $evaluation) {
-            foreach ($sections as $section) {
-                EvaluationItem::factory(10)->for($evaluation)->for($section)->create();
+        foreach ($templates as $template) {
+            $evaluations = $template->evaluations;
+            foreach ($evaluations as $evaluation) {
+                foreach ($template->questions as $question) {
+                    $evaluation->sections()->syncWithoutDetaching($question->section);
+                    EvaluationItem::factory()->for($question)->for($evaluation)->for($question->section)->create();
+                }
             }
         }
+
+        Log::info($templates[0]->evaluations);
+
+
+        User::factory(1)->create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'role' => 'admin'
+        ]);
 
     }
 }

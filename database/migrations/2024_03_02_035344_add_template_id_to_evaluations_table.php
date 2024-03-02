@@ -10,13 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('position');
-            $table->foreignId('team_id')->nullable()->constrained();
-            $table->timestamps();
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->foreignId('template_id')->after('user_id')->constrained();
         });
     }
 
@@ -25,6 +20,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('employees');
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->dropForeign('template_id');
+            $table->dropColumn('template_id');
+        });
     }
 };
