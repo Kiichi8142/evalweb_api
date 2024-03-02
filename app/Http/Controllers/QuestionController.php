@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Resources\QuestionResource;
 
 class QuestionController extends Controller
 {
@@ -13,15 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return QuestionResource::collection(Question::all());
     }
 
     /**
@@ -37,15 +30,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
+        return QuestionResource::make($question);
     }
 
     /**

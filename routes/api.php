@@ -3,7 +3,8 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationItemController;
-use App\Http\Controllers\TeacherEvaluationController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Http\Request;
@@ -37,4 +38,6 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('/templates', TemplateController::class);
+    Route::apiResource('/questions', QuestionController::class);
+    Route::apiResource('/sections', SectionController::class);
 });
