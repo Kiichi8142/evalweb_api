@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EvaluationItemResource extends JsonResource
+class SectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,9 @@ class EvaluationItemResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->question->name,
-            "description" => $this->question->description,
-            "score" => $this->score,
-            "section_id" => $this->section_id
+            "name" => $this->name,
+            "editable" => (bool) $this->editable,
+            "max_score" => $this->max_score,
         ];
     }
 }
