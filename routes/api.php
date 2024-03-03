@@ -39,5 +39,5 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('/sections', SectionController::class)->middleware('admin');
     Route::post('/templates/make', AddEvaluationToEmployeeController::class)->middleware('admin');
     Route::post('/templates/sections/{template}', [TemplateController::class, 'addSections'])->middleware('admin');
-    Route::delete('/templates/sections/{template}', [TemplateController::class, 'removeSections'])->middleware('admin');
+    Route::post('/templates/sections/{template}/rm', [TemplateController::class, 'removeSections'])->middleware('admin');
 });

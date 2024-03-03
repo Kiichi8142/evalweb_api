@@ -6,7 +6,10 @@ use App\Http\Requests\StoreSectionTemplateRequest;
 use App\Models\Template;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
+use App\Http\Resources\SectionResource;
 use App\Http\Resources\TemplateResource;
+use App\Models\Section;
+use Illuminate\Support\Facades\Log;
 
 class TemplateController extends Controller
 {
@@ -60,7 +63,7 @@ class TemplateController extends Controller
     {
         $template->sections()->syncWithoutDetaching($request->sections);
 
-        return 'Attached';
+        return SectionResource::collection($template->sections);
     }
 
     public function removeSections(StoreSectionTemplateRequest $request, Template $template)
