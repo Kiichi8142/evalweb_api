@@ -6,6 +6,8 @@ use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
+use App\Models\Template;
+use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
@@ -23,6 +25,11 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         $question = Question::create($request->validated());
+
+        // Will fix this later TODO!!!
+        $template = Template::find($question->template);
+
+        $template->sections()->syncWithoutDetaching($question->section);
 
         return QuestionResource::make($question);
     }
