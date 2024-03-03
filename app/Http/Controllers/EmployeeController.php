@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Resources\EmployeeResource;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 class EmployeeController extends Controller
@@ -25,6 +26,10 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $employee = Employee::create($request->validated());
+
+        User::factory()->for($employee)->create([
+            'name' => $employee->firstname . ' ' . $employee->lastname
+        ]);
 
         return EmployeeResource::make($employee);
     }

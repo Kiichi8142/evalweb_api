@@ -11,6 +11,7 @@ class Section extends Model
 
     protected $fillable = [
         "name",
+        "max_score",
     ];
 
     public function items()

@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TemplateResource;
 use App\Models\Employee;
 use App\Models\Evaluation;
 use App\Models\EvaluationItem;
 use App\Models\Team;
 use App\Models\Template;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class AddEvaluationToEmployeeController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Template $template)
     {
-        $data = $request->validate([
-            'template_id' => "required|exists:templates,id",
-        ]);
-
-        $template = Template::with('questions')->find($data)->first();
-
         $questions = $template->questions;
 
         if ($questions->isEmpty()) {
