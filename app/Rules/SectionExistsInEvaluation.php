@@ -26,7 +26,7 @@ class SectionExistsInEvaluation implements ValidationRule
     {
         $evaluation = Evaluation::find($this->evaluationId);
         if (!$evaluation->sections->contains('id', $value)) {
-            $fail('section not exist in evaluation' . $this->evaluationId);
+            $fail('section not exist in evaluation');
         }
     }
 }

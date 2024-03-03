@@ -30,11 +30,6 @@ class Evaluation extends Model
         return $this->hasMany(EvaluationItem::class);
     }
 
-    public function sections()
-    {
-        return $this->belongsToMany(Section::class)->withTimestamps();
-    }
-
     public function template()
     {
         return $this->belongsTo(Template::class);

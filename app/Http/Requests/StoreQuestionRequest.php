@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\TemplateHasSection;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreQuestionRequest extends FormRequest
@@ -25,8 +26,12 @@ class StoreQuestionRequest extends FormRequest
             "name" => 'required|string|max:100',
             "description" => 'required|string|max:255',
             "max_score" => 'integer|max:10',
-            "section_id" => 'required|exists:sections,id',
-            "template_id" => 'required|exists:templates,id'
+            "template_id" => 'required|exists:templates,id',
+            "section_id" => [
+                'required',
+                'exists:sections,id',
+                new TemplateHasSection($this->template_id)
+            ],
         ];
     }
 }

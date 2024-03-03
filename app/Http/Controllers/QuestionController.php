@@ -26,11 +26,6 @@ class QuestionController extends Controller
     {
         $question = Question::create($request->validated());
 
-        // Will fix this later TODO!!!
-        $template = Template::find($question->template);
-
-        $template->sections()->syncWithoutDetaching($question->section);
-
         return QuestionResource::make($question);
     }
 
