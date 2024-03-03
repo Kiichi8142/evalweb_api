@@ -71,7 +71,7 @@ class AddEvaluationToEmployeeController extends Controller
 
         foreach ($createdEvaluations as $evaluation) {
             foreach ($template->questions as $question) {
-                $evaluation->sections()->syncWithoutDetaching($question->section);
+                $template->sections()->syncWithoutDetaching($question->section);
                 $item = EvaluationItem::factory()->for($question)->for($evaluation)->for($question->section)->create();
                 $createdItems->push($item);
             }
