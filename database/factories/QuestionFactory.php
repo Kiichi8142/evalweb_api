@@ -18,7 +18,7 @@ class QuestionFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => fake()->sentence(),
+            'description' => fake()->sentence(4),
         ];
     }
 }
