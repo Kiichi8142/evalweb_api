@@ -90,9 +90,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        Log::info($templates[0]->evaluations);
-
-
         User::factory(1)->create([
             'name' => 'admin',
             'email' => 'admin@example.com',

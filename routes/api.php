@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddEvaluationToEmployeeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EvaluationItemController;
@@ -40,4 +41,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('/templates', TemplateController::class);
     Route::apiResource('/questions', QuestionController::class);
     Route::apiResource('/sections', SectionController::class);
+    Route::post('/templates/make', AddEvaluationToEmployeeController::class);
 });
