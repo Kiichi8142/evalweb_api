@@ -35,11 +35,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('/employees', EmployeeController::class)->middleware('admin');
     Route::apiResource('/teams', TeamController::class)->middleware('admin');
-});
-
-Route::prefix('v1')->group(function () {
-    Route::apiResource('/templates', TemplateController::class);
-    Route::apiResource('/questions', QuestionController::class);
-    Route::apiResource('/sections', SectionController::class);
-    Route::post('/templates/make', AddEvaluationToEmployeeController::class);
+    Route::apiResource('/templates', TemplateController::class)->middleware('admin');
+    Route::apiResource('/questions', QuestionController::class)->middleware('admin');
+    Route::apiResource('/sections', SectionController::class)->middleware('admin');
+    Route::post('/templates/make', AddEvaluationToEmployeeController::class)->middleware('admin');
 });
