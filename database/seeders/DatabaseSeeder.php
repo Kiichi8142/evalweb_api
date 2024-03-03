@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         $template->sections()->sync($sections);
 
         foreach ($sections as $section) {
-            Question::factory(10)->for($template)->for($section)->create();
+            Question::factory(5)->for($template)->for($section)->create();
         }
 
         foreach ($teams as $team) {
