@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('max_score')->default(0);
+            $table->integer('max_score')->default(4);
             $table->foreignId('section_id')->constrained();
             $table->foreignId('template_id')->constrained()->onDelete('cascade');
             $table->timestamps();

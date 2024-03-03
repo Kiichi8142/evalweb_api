@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEvaluationSectionRequest extends FormRequest
+class StoreSectionTemplateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreEvaluationSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "sections" => 'required|exists:App\Models\Section,id'
+            "sections" => 'required|exists:sections,id'
         ];
     }
 }

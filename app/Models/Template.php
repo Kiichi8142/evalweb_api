@@ -23,4 +23,9 @@ class Template extends Model
     {
         return $this->hasMany(Evaluation::class);
     }
+
+    public function sections()
+    {
+        return $this->belongsToMany(Section::class)->withTimestamps();
+    }
 }

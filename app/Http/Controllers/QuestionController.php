@@ -22,7 +22,9 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        $question = Question::create($request->validated());
+
+        return QuestionResource::make($question);
     }
 
     /**

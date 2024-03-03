@@ -57,6 +57,8 @@ class DatabaseSeeder extends Seeder
 
         $template = Template::factory()->create();
 
+        $template->sections()->sync($sections);
+
         foreach ($sections as $section) {
             Question::factory(10)->for($template)->for($section)->create();
         }
@@ -84,7 +86,6 @@ class DatabaseSeeder extends Seeder
             $evaluations = $template->evaluations;
             foreach ($evaluations as $evaluation) {
                 foreach ($template->questions as $question) {
-                    $evaluation->sections()->syncWithoutDetaching($question->section);
                     EvaluationItem::factory()->for($question)->for($evaluation)->for($question->section)->create();
                 }
             }

@@ -59,11 +59,4 @@ class EvaluationController extends Controller
     {
         //
     }
-
-    public function addSections(StoreEvaluationSectionRequest $request, Evaluation $evaluation)
-    {
-        $evaluation->sections()->syncWithoutDetaching($request->sections);
-
-        return 'Attached';
-    }
 }

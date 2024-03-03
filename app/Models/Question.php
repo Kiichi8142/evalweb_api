@@ -11,7 +11,9 @@ class Question extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'max_score',
+        'template_id',
         'section_id',
     ];
 

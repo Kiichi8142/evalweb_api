@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSectionTemplateRequest;
 use App\Models\Template;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
@@ -51,6 +52,20 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         $template->delete();
+
+        return response()->noContent();
+    }
+
+    public function addSections(StoreSectionTemplateRequest $request, Template $template)
+    {
+        $template->sections()->syncWithoutDetaching($request->sections);
+
+        return 'Attached';
+    }
+
+    public function removeSections(StoreSectionTemplateRequest $request, Template $template)
+    {
+        $template->sections()->detach($request->sections);
 
         return response()->noContent();
     }

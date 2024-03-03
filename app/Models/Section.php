@@ -13,11 +13,6 @@ class Section extends Model
         "name",
     ];
 
-    public function evaluations()
-    {
-        return $this->belongsToMany(Evaluation::class);
-    }
-
     public function items()
     {
         return $this->hasMany(EvaluationItem::class);
@@ -26,5 +21,10 @@ class Section extends Model
     public function questions()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function templates()
+    {
+        return $this->belongsToMany(Template::class);
     }
 }
