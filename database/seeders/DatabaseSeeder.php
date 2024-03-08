@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $teams = Team::factory(3)->create();
 
         foreach ($teams as $team) {
-            $employees = Employee::factory(5)->for($team)->create();
+            $employees = Employee::factory(25)->for($team)->create();
 
             foreach ($employees as $employee) {
                 User::factory()->for($employee)->state([
