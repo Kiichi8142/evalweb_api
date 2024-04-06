@@ -34,27 +34,33 @@ class AddEvaluationToEmployeeController extends Controller
             return response()->json(['message' => 'No employees record found.'], 403);
         }
 
+        // define acc for created evaluation
         $createdEvaluations = collect([]);
 
         foreach ($teams as $team) {
             $manager = $team->manager_id;
             $emps = $team->employees;
-            // make evaluation for manager
+
+            // make evaluation for everyone in team
+            // self evaluation
             foreach ($emps as $emp) {
-                if ($emp->id != $manager) {
+                $eval = Evaluation::factory()->for($emp)->for($template)->create([
+                    "user_id" => $emp->id
+                ]);
+                $createdEvaluations->push($eval);
+
+                // make evaluation for manager or the above eval
+                if($emp->id != $manager) {
                     $manager_evaluations = Evaluation::factory()->for($emp)->for($template)->create([
-                        "user_id" => $manager
+                        "user_id" => $manager,
+                        "accessor_eval_id" => $eval->id
                     ]);
                     $createdEvaluations->push($manager_evaluations);
                 }
-                // make self assessment
-                $emp_evaluations = Evaluation::factory()->for($emp)->for($template)->create([
-                    "user_id" => $emp->id
-                ]);
-                $createdEvaluations->push($emp_evaluations);
             }
         }
 
+        // checking if the evaluation successfully created
         if ($createdEvaluations->isEmpty()) {
             return response()->json(['message' => 'Failed to create evaluation for employee'], 403);
         }

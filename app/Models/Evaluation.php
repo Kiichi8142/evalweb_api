@@ -35,6 +35,11 @@ class Evaluation extends Model
         return $this->belongsTo(Template::class);
     }
 
+    public function assessor_eval()
+    {
+        return $this->belongsTo(self::class, 'accessor_eval_id');
+    }
+
     public function isCompleted(): Attribute
     {
         return Attribute::make(

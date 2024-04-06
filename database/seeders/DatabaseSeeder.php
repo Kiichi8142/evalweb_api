@@ -88,21 +88,40 @@ class DatabaseSeeder extends Seeder
         //     Question::factory(5)->for($template)->for($section)->create();
         // }
 
+        // make evaluations for a team
         foreach ($teams as $team) {
             $manager = $team->manager_id;
             $emps = $team->employees;
-            // make evaluation for manager
+
+            // make evaluation for everyone in team
+            // self evaluation
             foreach ($emps as $emp) {
-                if ($emp->id != $manager) {
-                    Evaluation::factory()->for($emp)->for($template)->create([
-                        "user_id" => $manager
-                    ]);
-                }
-                // make self assessment
-                Evaluation::factory()->for($emp)->for($template)->create([
+                $eval = Evaluation::factory()->for($emp)->for($template)->create([
                     "user_id" => $emp->id
                 ]);
+
+                if($emp->id != $manager) {
+                    Evaluation::factory()->for($emp)->for($template)->create([
+                        "user_id" => $manager,
+                        "accessor_eval_id" => $eval->id
+                    ]);
+                }
             }
+
+
+
+            // make evaluation for a manager
+            // foreach ($emps as $emp) {
+            //     if ($emp->id != $manager) {
+            //         Evaluation::factory()->for($emp)->for($template)->create([
+            //             "user_id" => $manager
+            //         ]);
+            //     }
+            //     // make self assessment
+            //     Evaluation::factory()->for($emp)->for($template)->create([
+            //         "user_id" => $emp->id
+            //     ]);
+            // }
         }
 
         $templates = Template::all();
