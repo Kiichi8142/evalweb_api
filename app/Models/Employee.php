@@ -12,9 +12,20 @@ class Employee extends Model
     protected $fillable = [
         "firstname",
         "lastname",
-        "position",
+        "job_title_id",
+        "organization_id",
         "team_id"
     ];
+
+    public function job_title()
+    {
+        return $this->belongsTo(JobTitle::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function team()
     {

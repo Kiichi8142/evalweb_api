@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\JobTitle;
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,8 @@ class EmployeeFactory extends Factory
         return [
             "firstname" => fake()->firstname(),
             "lastname" => fake()->lastname(),
-            "position" => fake()->randomElement(['Software Engineer', 'Data Analyst', 'Sales', 'Intern', 'Software Architect'])
+            "job_title_id" => JobTitle::inRandomOrder()->first()->id,
+            "organization_id" => Organization::inRandomOrder()->first()->id
         ];
     }
 }
