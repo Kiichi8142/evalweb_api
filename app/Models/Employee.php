@@ -14,7 +14,6 @@ class Employee extends Model
         "lastname",
         "job_title_id",
         "organization_id",
-        "team_id"
     ];
 
     public function job_title()
