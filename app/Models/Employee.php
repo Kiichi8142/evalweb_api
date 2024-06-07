@@ -27,11 +27,6 @@ class Employee extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function team()
-    {
-        return $this->belongsTo(Team::class);
-    }
-
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);

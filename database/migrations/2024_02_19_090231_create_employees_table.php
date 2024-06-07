@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('firstname', 50);
             $table->string('lastname', 50);
-            $table->foreignId('team_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
