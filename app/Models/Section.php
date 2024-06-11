@@ -24,8 +24,8 @@ class Section extends Model
         return $this->hasMany(Question::class);
     }
 
-    public function templates()
+    public function template()
     {
-        return $this->belongsToMany(Template::class);
+        return $this->belongsTo(Template::class);
     }
 }

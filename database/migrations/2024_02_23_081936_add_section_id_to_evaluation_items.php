@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('evaluation_items', function (Blueprint $table) {
+        Schema::table('scores', function (Blueprint $table) {
             $table->foreignId('section_id')->after('score')->constrained()->onDelete('cascade');
         });
     }
@@ -20,7 +20,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('evaluation_items', function (Blueprint $table) {
+        Schema::table('scores', function (Blueprint $table) {
             $table->dropForeign(['section_id']);
             $table->dropColumn('section_id');
         });

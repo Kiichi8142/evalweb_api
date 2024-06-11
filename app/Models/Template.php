@@ -26,6 +26,6 @@ class Template extends Model
 
     public function sections()
     {
-        return $this->belongsToMany(Section::class)->withTimestamps();
+        return $this->hasMany(Section::class);
     }
 }
