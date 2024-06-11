@@ -14,11 +14,6 @@ class Section extends Model
         "max_score",
     ];
 
-    public function items()
-    {
-        return $this->hasMany(EvaluationItem::class);
-    }
-
     public function questions()
     {
         return $this->hasMany(Question::class);

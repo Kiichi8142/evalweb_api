@@ -26,9 +26,4 @@ class Question extends Model
     {
         return $this->belongsTo(Section::class);
     }
-
-    public function items()
-    {
-        return $this->hasMany(EvaluationItem::class);
-    }
 }
