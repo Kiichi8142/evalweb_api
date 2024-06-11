@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('sections', function (Blueprint $table) {
             $table->unsignedBigInteger('template_id')->after('max_score')->nullable();
-            $table->foreign('template_id')->references('id')->on('templates');
+            $table->foreign('template_id')->references('id')->on('templates')->onDelete('cascade');;
         });
     }
 

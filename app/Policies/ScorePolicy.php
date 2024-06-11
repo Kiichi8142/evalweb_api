@@ -2,27 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\EvaluationItem;
+use App\Models\Score;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Log;
 
-class EvaluationItemPolicy
+class ScorePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, EvaluationItem $item): bool
+    public function view(User $user, Score $score): bool
     {
-        return $user->id === $item->evaluation->user_id;
+        //
     }
 
     /**
@@ -30,22 +29,38 @@ class EvaluationItemPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, EvaluationItem $item): bool
+    public function update(User $user, Score $score): bool
     {
-        return $user->id === $item->evaluation->user_id;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, EvaluationItem $evaluationItem): bool
+    public function delete(User $user, Score $score): bool
     {
-        return false;
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, Score $score): bool
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, Score $score): bool
+    {
+        //
     }
 }

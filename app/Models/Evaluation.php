@@ -25,11 +25,6 @@ class Evaluation extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function items()
-    {
-        return $this->hasMany(EvaluationItem::class);
-    }
-
     public function template()
     {
         return $this->belongsTo(Template::class);
@@ -38,12 +33,5 @@ class Evaluation extends Model
     public function assessor_eval()
     {
         return $this->belongsTo(self::class, 'accessor_eval_id');
-    }
-
-    public function isCompleted(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->items->every(fn(EvaluationItem $item) => $item->score > 0),
-        );
     }
 }

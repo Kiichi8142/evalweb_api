@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EvaluationItem>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Score>
  */
-class EvaluationItemFactory extends Factory
+class ScoreFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class EvaluationItemFactory extends Factory
     public function definition(): array
     {
         return [
-            "score" => 0,
+            //
         ];
     }
 }
