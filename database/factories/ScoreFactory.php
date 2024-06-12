@@ -17,7 +17,7 @@ class ScoreFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'score' => 0,
         ];
     }
 }
